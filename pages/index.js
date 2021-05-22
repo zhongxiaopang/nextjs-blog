@@ -2,7 +2,7 @@
  * @文档描述:
  * @author: 伟烽
  * @Date: 2021-02-05 23:31:09
- * @LastEditTime: 2021-05-22 15:50:47
+ * @LastEditTime: 2021-05-22 17:56:56
  * @LastEditors: 伟烽
  */
 import Head from 'next/head';
@@ -56,3 +56,5 @@ export async function getStaticProps() {
         }
     };
 }
+
+console.log('indexjs');
