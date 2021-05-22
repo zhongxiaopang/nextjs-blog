@@ -2,7 +2,7 @@
  * @文档描述:
  * @author: 伟烽
  * @Date: 2021-02-05 23:31:09
- * @LastEditTime: 2021-05-22 17:56:56
+ * @LastEditTime: 2021-05-22 19:27:48
  * @LastEditors: 伟烽
  */
 import Head from 'next/head';
@@ -12,8 +12,17 @@ import Layout, { siteTitle } from '../components/layout';
 import Alert from '../components/Alert/index';
 import utilStyles from '../styles/utils.module.css';
 import { getSortedPostsData } from '../lib/posts';
+import { GetStaticProps } from 'next';
 
-export default function Home({ allPostsData }) {
+export default function Home({
+    allPostsData
+}: {
+    allPostsData: {
+        date: string;
+        title: string;
+        id: string;
+    }[];
+}) {
     return (
         <Layout home>
             <Head>
@@ -48,13 +57,13 @@ export default function Home({ allPostsData }) {
     );
 }
 
-export async function getStaticProps() {
+export const getStaticProps: GetStaticProps = async () => {
     const allPostsData = getSortedPostsData();
     return {
         props: {
             allPostsData
         }
     };
-}
+};
 
 console.log('indexjs');

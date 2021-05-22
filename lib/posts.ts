@@ -2,7 +2,7 @@
  * @文档描述:
  * @author: 伟烽
  * @Date: 2021-05-21 19:37:53
- * @LastEditTime: 2021-05-22 15:39:51
+ * @LastEditTime: 2021-05-22 19:22:44
  * @LastEditors: 伟烽
  */
 import fs from 'fs';
@@ -30,7 +30,7 @@ export function getSortedPostsData() {
         // Combine the data with the id
         return {
             id,
-            ...matterResult.data
+            ...(matterResult.data as { date: string; title: string })
         };
     });
     // Sort posts by date
@@ -68,7 +68,7 @@ export function getAllPostIds() {
     });
 }
 
-export async function getPostData(id) {
+export async function getPostData(id: string) {
     const fullPath = path.join(postsDirectory, `${id}.md`);
     const fileContents = fs.readFileSync(fullPath, 'utf8');
 
@@ -83,6 +83,6 @@ export async function getPostData(id) {
     return {
         id,
         contentHtml,
-        ...matterResult.data
+        ...(matterResult.data as { date: string; title: string })
     };
 }

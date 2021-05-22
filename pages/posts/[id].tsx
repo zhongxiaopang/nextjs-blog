@@ -2,7 +2,7 @@
  * @文档描述:
  * @author: 伟烽
  * @Date: 2021-05-22 15:08:39
- * @LastEditTime: 2021-05-22 15:47:44
+ * @LastEditTime: 2021-05-22 19:25:18
  * @LastEditors: 伟烽
  */
 import Head from 'next/head';
@@ -10,8 +10,17 @@ import Layout from '../../components/layout';
 import Date from '../../components/date';
 import { getAllPostIds, getPostData } from '../../lib/posts';
 import utilStyles from '../../styles/utils.module.css';
+import { GetStaticProps, GetStaticPaths } from 'next';
 
-export default function Post({ postData }) {
+export default function Post({
+    postData
+}: {
+    postData: {
+        title: string;
+        date: string;
+        contentHtml: string;
+    };
+}) {
     return (
         <Layout>
             <Head>
@@ -29,21 +38,21 @@ export default function Post({ postData }) {
     );
 }
 
-export async function getStaticPaths() {
+export const getStaticPaths: GetStaticPaths = async () => {
     // Return a list of possible value for id
     const paths = getAllPostIds();
     return {
         paths,
         fallback: false
     };
-}
+};
 
-export async function getStaticProps({ params }) {
+export const getStaticProps: GetStaticProps = async ({ params }) => {
     // Add the "await" keyword like this:
-    const postData = await getPostData(params.id);
+    const postData = await getPostData(params.id as string);
     return {
         props: {
             postData
         }
     };
-}
+};
