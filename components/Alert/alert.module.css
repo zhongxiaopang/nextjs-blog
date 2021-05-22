@@ -1,0 +1,11 @@
+.success {
+  color: green;
+}
+.error {
+  color: red;
+}
+.flex-text{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
